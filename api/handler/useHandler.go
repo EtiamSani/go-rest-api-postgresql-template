@@ -13,7 +13,9 @@ func UseHandler(c *gin.Context) {
 }
 
 func GetAllUsers(c *gin.Context) {
-	
+	c.JSON(200, gin.H{
+		"user": "user",
+	})
 }
 
 func CreateUser(c *gin.Context) {

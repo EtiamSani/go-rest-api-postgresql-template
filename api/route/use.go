@@ -5,8 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func UseRouter() *gin.Engine {
-router := gin.Default()
-router.POST("/use", handler.CreateUser) 
-return router
+func UseRouter( r *gin.Engine)  {
+	r.GET("/use", handler.GetAllUsers) 
+
 }
