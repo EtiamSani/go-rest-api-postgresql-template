@@ -1,7 +1,6 @@
 package store
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -17,6 +16,8 @@ const (
 	MaxAge = 86400 * 30
 	IsProd = false
 )
+
+var store *sessions.CookieStore
 
 func NewAuth(){
 	err := godotenv.Load()
@@ -43,5 +44,12 @@ func NewAuth(){
 		google.New(googleClientId, googleClientSecret, "http://localhost:3000/auth/google/callback"),
 	)
 
-	fmt.Println("Authentication setup complete.")
 }
+func GetSessionStore() *sessions.CookieStore {
+	if store == nil {
+		store := sessions.NewCookieStore([]byte(key))
+		return store
+	}
+    return store
+}
+
