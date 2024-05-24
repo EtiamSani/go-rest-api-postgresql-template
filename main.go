@@ -9,12 +9,14 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/stripe/stripe-go/v78"
 	"go.uber.org/zap"
 )
 
 func init() {
 	store.LoadEnvVariables()
 	store.ConnectToDB()
+	stripe.Key = os.Getenv("STRIPE_SECRET_KEY")
 }
 
 
@@ -37,7 +39,8 @@ func main() {
 	router.Use(cors.New(corsConfig))
 
 	route.OauthRouter(router)
-	route.UseRouter(router)
+	route.UserRouter(router)
+	route.StripeRouter(router)
 
     router.Run("localhost:" + os.Getenv("PORT"))
 	logger,_ := zap.NewProduction()
