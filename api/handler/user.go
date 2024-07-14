@@ -6,6 +6,7 @@ import (
 	"os"
 	"time"
 
+	internal "github.com/etiamsani/go-rest-api-postgresl-template/api/internal/user"
 	"github.com/etiamsani/go-rest-api-postgresl-template/api/model"
 	"github.com/etiamsani/go-rest-api-postgresl-template/api/store"
 	"github.com/gin-gonic/gin"
@@ -96,7 +97,7 @@ func GetUserData(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"user": user})
 }
 
-func Signup(c* gin.Context) {
+func Signup(c *gin.Context) {
 	var body struct {
 		Email string
 		Password string
@@ -122,7 +123,10 @@ func Signup(c* gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Failed to create user"})
 		return
 	}
+
 	
+	internal.SendVerificationEmail(c, &user)
+
 	c.JSON(http.StatusOK, gin.H{})
 }
 
@@ -169,4 +173,17 @@ func Login(c* gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{"token": tokenString})
 
+}
+
+func VerifyEmail(c *gin.Context) {
+	internal.VerifyEmail(c)
+}
+
+func ResendVerificationEmail(c *gin.Context) {
+	email := c.Param("email")
+	if email == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Email parameter is missing"})
+		return
+	}
+	internal.ResendVerificationEmail(c, email) 
 }

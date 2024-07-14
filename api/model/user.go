@@ -1,6 +1,10 @@
 package model
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type User struct {
     gorm.Model
@@ -8,4 +12,8 @@ type User struct {
     Email string `json:"email" gorm:"not null; unique"`
     Password string `json:"password" gorm:"null"`
 	IsSubscribed bool `json:"is_subscribed" gorm:"default:false"`
+    IsVerified bool `json:"is_verified" gorm:"default:false"`
+    CreatedAt  time.Time `json:"createdat" `
+	UpdatedAt  time.Time `json:"updatedat"`
+
 }

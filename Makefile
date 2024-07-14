@@ -6,7 +6,7 @@ MAIN_GO := main.go
 
 
 run:
-	CompileDaemon --build="go build $(MAIN_GO)" --command="./main"
+	CompileDaemon --build="go build $(MAIN_GO)" --command="./main" 
 
 
 migrate:
@@ -17,3 +17,4 @@ up:
 
 down:
 	docker-compose down
+

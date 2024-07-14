@@ -30,3 +30,8 @@ func UserRouter( r *gin.Engine)  {
 	r.POST("/user/signup", handler.Signup)
 	r.POST("/user/login", handler.Login)
 }
+
+func VerifyRouter( r *gin.Engine)  {
+	r.GET("/verify-email", handler.VerifyEmail)
+	r.GET("/resend-verify-email/:email", handler.ResendVerificationEmail)
+}

@@ -2,7 +2,16 @@
 
 ## Purpose
 
-REST API implementing a CRUD on Posgresql and a login.
+REST API template ! 
+
+## features
+
+- ✅ CORS 
+- ✅ Paypal paiement 
+- ✅ Gorm
+- ✅ Gin 
+- ✅ Google oAuth
+- ✅ JWT auth
 
 ## Usage
 
@@ -35,12 +44,14 @@ Use `.env.example` to generate your `.env` file
 ## Structure
 
 ```
-─api
-    ├───handler
-    ├───migrate
-    ├───model
-    ├───route
-    └───store
+api
+├───handler
+├───migrate
+├───model
+├───pkg
+│   └───middleware
+├───route
+└───store
 ```
 
 ## How to Connect to a Docker Database via pgAdmin4
